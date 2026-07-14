@@ -1,23 +1,42 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function ReleaseSection() {
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const hasStartedRef = useRef(false);
 
-  /*
-    0 — سیاهی کامل
-    1 — ظاهرشدن BREATHE
-    2 — دم اول؛ شکاف کوچک
-    3 — بازدم؛ شکاف باریک‌تر
-    4 — دم دوم؛ بازشدن بیشتر
-    5 — نمایش کامل تصویر
-    6 — جمله پایانی
-  */
   const [phase, setPhase] = useState(0);
+  const [soundBlocked, setSoundBlocked] = useState(false);
+
+  const stopBreathSound = useCallback(() => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    audio.pause();
+    audio.currentTime = 0;
+  }, []);
+
+  const playBreathSound = useCallback(async () => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    try {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.volume = 0.55;
+
+      await audio.play();
+      setSoundBlocked(false);
+    } catch {
+      setSoundBlocked(true);
+    }
+  }, []);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -31,10 +50,16 @@ export default function ReleaseSection() {
 
     const startSequence = () => {
       clearTimers();
+      stopBreathSound();
       setPhase(0);
+      setSoundBlocked(false);
 
       timersRef.current = [
-        setTimeout(() => setPhase(1), 900),
+        setTimeout(() => {
+          setPhase(1);
+          void playBreathSound();
+        }, 900),
+
         setTimeout(() => setPhase(2), 2800),
         setTimeout(() => setPhase(3), 4500),
         setTimeout(() => setPhase(4), 6200),
@@ -57,7 +82,9 @@ export default function ReleaseSection() {
         if (!entry.isIntersecting) {
           hasStartedRef.current = false;
           clearTimers();
+          stopBreathSound();
           setPhase(0);
+          setSoundBlocked(false);
         }
       },
       {
@@ -70,8 +97,9 @@ export default function ReleaseSection() {
     return () => {
       observer.disconnect();
       clearTimers();
+      stopBreathSound();
     };
-  }, []);
+  }, [playBreathSound, stopBreathSound]);
 
   const revealAmount = () => {
     if (phase < 2) return 0;
@@ -97,6 +125,13 @@ export default function ReleaseSection() {
         ref={stageRef}
         className="sticky top-0 h-screen overflow-hidden bg-black"
       >
+        <audio
+          ref={audioRef}
+          src="/breath.mp3"
+          preload="auto"
+          playsInline
+        />
+
         {/* تصویر اصلی */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -137,7 +172,7 @@ export default function ReleaseSection() {
           />
         </div>
 
-        {/* پرده سیاه بالا؛ جایگزین clip-path سنگین */}
+        {/* پرده سیاه بالا */}
         <div
           className="absolute left-0 top-0 z-20 h-1/2 w-full bg-black transition-transform duration-[1800ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
           style={{
@@ -188,7 +223,7 @@ export default function ReleaseSection() {
           </h2>
         </div>
 
-        {/* جمله پایانی — وسط پایین و یک‌خطی */}
+        {/* جمله پایانی */}
         <div className="absolute inset-x-0 bottom-[9%] z-50 flex justify-center px-4">
           <div
             className={`flex flex-col items-center text-center transition-[opacity,transform] duration-[1600ms] ${
@@ -203,10 +238,21 @@ export default function ReleaseSection() {
             <span className="mb-5 h-px w-12 bg-[#d91f26] shadow-[0_0_16px_rgba(217,31,38,0.7)]" />
 
             <p className="whitespace-nowrap text-[10px] uppercase tracking-[0.2em] text-white/75 sm:text-xs md:text-sm">
-              You were never meant to carry everything
+              You were never meant to carry everything.
             </p>
           </div>
         </div>
+
+        {/* وقتی مرورگر صدای خودکار را مسدود کند */}
+        {soundBlocked && (
+          <button
+            type="button"
+            onClick={() => void playBreathSound()}
+            className="absolute bottom-6 right-6 z-[80] border border-white/25 bg-black/55 px-4 py-3 text-[10px] uppercase tracking-[0.25em] text-white/75 backdrop-blur-md transition hover:border-white/60 hover:text-white"
+          >
+            Enable sound
+          </button>
+        )}
 
         {/* Grain سبک */}
         <div
