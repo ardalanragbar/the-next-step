@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ThresholdSection from "./components/ThresholdSection";
+import ReleaseSection from "./components/ReleaseSection";
 
 export default function Home() {
   return (
@@ -166,6 +167,7 @@ export default function Home() {
   </div>
 </section>
 <ThresholdSection />
+<ReleaseSection />
     </main>
   );
 }
