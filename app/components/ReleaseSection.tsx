@@ -238,7 +238,7 @@ export default function ReleaseSection() {
             <span className="mb-5 h-px w-12 bg-[#d91f26] shadow-[0_0_16px_rgba(217,31,38,0.7)]" />
 
             <p className="whitespace-nowrap text-[10px] uppercase tracking-[0.2em] text-white/75 sm:text-xs md:text-sm">
-              You were never meant to carry everything.
+              You were never meant to carry everything
             </p>
           </div>
         </div>

@@ -1,47 +1,12 @@
 import Image from "next/image";
 import ThresholdSection from "./components/ThresholdSection";
 import ReleaseSection from "./components/ReleaseSection";
+import HeroSection from "./components/HeroSection";
 
 export default function Home() {
   return (
     <main className="bg-[#050505] text-white">
-      {/* HERO — THE WEIGHT */}
-      <section className="relative flex min-h-screen items-end overflow-hidden">
-        <Image
-          src="/hero-barbell.JPG"
-          alt="Barbell resting in a dark gym"
-          fill
-          priority
-          quality={95}
-          className="object-cover object-center"
-        />
-
-        <div className="absolute inset-0 bg-black/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-black/45" />
-
-        <div className="relative z-10 w-full px-4 pb-16 md:px-8 md:pb-24 lg:px-12">
-          <p className="mb-5 text-xs uppercase tracking-[0.45em] text-white/60">
-            Chapter One — The Weight
-          </p>
-
-          <h1 className="max-w-4xl text-5xl font-semibold uppercase leading-[0.88] tracking-[-0.04em] sm:text-6xl md:text-7xl lg:text-[5.8rem]">
-            Some things
-            <br />
-            are too heavy
-            <br />
-            to carry forever 
-          </h1>
-
-          <p className="mt-8 max-w-sm text-xs uppercase leading-6 tracking-[0.18em] text-white/55">
-            You only need light for the next step
-          </p>
-        </div>
-
-        <div className="absolute bottom-10 right-6 z-10 hidden items-center gap-4 text-xs uppercase tracking-[0.35em] text-white/45 md:flex">
-          <span className="h-px w-12 bg-white/30" />
-          Scroll to begin
-        </div>
-      </section>
+      <HeroSection />
 
       {/* CHAPTER TWO — SILENCE */}
       <section className="relative min-h-screen overflow-hidden bg-[#050505]">
