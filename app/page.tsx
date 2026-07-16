@@ -2,6 +2,7 @@ import Image from "next/image";
 import ThresholdSection from "./components/ThresholdSection";
 import ReleaseSection from "./components/ReleaseSection";
 import HeroSection from "./components/HeroSection";
+import PressureMarker from "./components/PressureMarker";
 
 export default function Home() {
   return (
@@ -26,10 +27,10 @@ export default function Home() {
 
   <div className="relative z-10 flex min-h-screen items-center px-4 md:px-8 lg:px-12">
     <div className="max-w-2xl">
-      <p className="mb-6 text-xs uppercase tracking-[0.45em] text-white/55">
-        Chapter Two — Silence
-      </p>
-
+     <p className="mb-6 flex items-center gap-4 text-xs uppercase tracking-[0.45em] text-white/55">
+  <span className="h-px w-10 bg-[#d91f26] shadow-[0_0_12px_rgba(217,31,38,0.55)]" />
+  Chapter Two — Silence
+</p>
       <h2 className="text-4xl font-semibold uppercase leading-[0.92] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl">
   You do not need to see
   <br />
@@ -62,9 +63,10 @@ export default function Home() {
 
   <div className="relative z-10 flex min-h-screen items-center justify-end px-4 md:px-8 lg:px-12">
     <div className="max-w-2xl">
-      <p className="mb-6 text-xs uppercase tracking-[0.45em] text-white/55">
-        Chapter Three — The First Step
-      </p>
+     <p className="mb-6 flex items-center gap-4 text-xs uppercase tracking-[0.45em] text-white/55">
+  <span className="h-8 w-px bg-[#d91f26] shadow-[0_0_12px_rgba(217,31,38,0.55)]" />
+  Chapter Three — The First Step
+</p>
 <h2 className="text-3xl font-semibold uppercase leading-[0.92] tracking-[-0.04em] text-white sm:text-4xl md:text-5xl lg:text-[4.25rem]">
   <span className="block md:whitespace-nowrap">
     You do not need to 
@@ -103,9 +105,7 @@ export default function Home() {
 
   <div className="relative z-10 flex min-h-screen items-center px-4 md:px-8 lg:px-12">
     <div className="w-full max-w-3xl">
-      <p className="mb-6 text-xs uppercase tracking-[0.45em] text-white/55">
-        Chapter Four — Pressure
-      </p>
+ <PressureMarker />
 
       <h2 className="text-3xl font-semibold uppercase leading-[0.92] tracking-[-0.04em] text-white sm:text-4xl md:text-5xl lg:text-[4rem]">
   <span className="block md:whitespace-nowrap">
