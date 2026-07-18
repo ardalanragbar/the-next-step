@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function BeyondGymSection() {
@@ -34,13 +33,11 @@ export default function BeyondGymSection() {
       ref={sectionRef}
       className="relative min-h-screen overflow-hidden bg-[#050505]"
     >
-      {/* Background image */}
-      <Image
-        src="/Beyond-road.jpg"
-        alt="An empty road stretching toward the horizon"
-        fill
-        sizes="100vw"
-        className={`object-cover object-center transition-transform duration-[5000ms] ease-out ${
+      {/* Background image — served directly from public */}
+      <img
+        src="/beyond-road.jpg?v=3"
+        alt=""
+        className={`absolute inset-0 h-full w-full object-cover object-center transition-transform duration-[5000ms] ease-out ${
           visible ? "scale-100" : "scale-105"
         }`}
       />
@@ -52,7 +49,7 @@ export default function BeyondGymSection() {
 
       <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/75 via-transparent to-[#050505]/20" />
 
-      {/* Minimal direction arrow */}
+      {/* White minimal arrow */}
       {visible && (
         <div
           className="pointer-events-none absolute left-1/2 top-[72%] z-[5] -translate-x-1/2"
