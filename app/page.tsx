@@ -3,6 +3,8 @@ import ThresholdSection from "./components/ThresholdSection";
 import ReleaseSection from "./components/ReleaseSection";
 import HeroSection from "./components/HeroSection";
 import PressureMarker from "./components/PressureMarker";
+import BeyondGymSection from "./components/BeyondGymSection";
+import EpilogueSection from "./components/EpilogueSection";
 
 export default function Home() {
   return (
@@ -133,6 +135,8 @@ export default function Home() {
 </section>
 <ThresholdSection />
 <ReleaseSection />
+<BeyondGymSection />
+<EpilogueSection />
     </main>
   );
 }
